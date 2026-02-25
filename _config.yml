@@ -1,2 +1,5 @@
 title: Edhita
 lead: Fully open source text editor for iOS written in Swift.
+
+plugins:
+  - jekyll-redirect-from
