@@ -1,8 +1,19 @@
 # howeverios-edhita
 
+[![Build](https://github.com/however-yir/howeverios-edhita/actions/workflows/ios-ci.yml/badge.svg)](https://github.com/however-yir/howeverios-edhita/actions/workflows/ios-ci.yml)
+[![Docs](https://img.shields.io/badge/docs-README-0A7EFA)](https://github.com/however-yir/howeverios-edhita#readme)
+[![License](https://img.shields.io/badge/license-MIT-16A34A)](./LICENSE)
+[![Status](https://img.shields.io/badge/status-showcase--ready-2563EB)](https://github.com/however-yir/howeverios-edhita)
+
 🔥 基于 SwiftUI 文本编辑器项目的衍生工程，定位为“轻量编辑 + 可扩展插件 + 工程化治理”的 iOS 应用实践仓库。  
 🚀 聚焦 SwiftUI、文件系统、编辑体验、配置治理与发布协作流程。  
 ⭐ 适合用于 iOS 应用开发学习、编辑器类产品原型孵化、以及个人品牌化二开项目。
+
+> Status: `showcase-ready`
+>
+> Upstream: `tnantoka/edhita`
+>
+> Series: [howeverandroid-architecture-lab](https://github.com/however-yir/howeverandroid-architecture-lab)
 
 ## 目录
 
