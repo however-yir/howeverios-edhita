@@ -42,6 +42,7 @@ struct EditorView: View {
                     .foregroundColor(Settings.shared.textColor)
                     .font(.custom(Settings.shared.fontName, size: Settings.shared.fontSize))
                     .disabled(!item.isEditable)
+                    .accessibilityIdentifier("editor.text")
                     .introspectTextView(customize: { textView in
                         self.textView = textView
                     })
@@ -90,6 +91,7 @@ struct EditorView: View {
                             Image(systemName: "square.and.arrow.up")
                         }
                     )
+                    .accessibilityIdentifier("editor.share")
                     Button(
                         action: {
                             reloader.toggle()

@@ -76,6 +76,7 @@ struct FinderListView: View {
                                 Image(systemName: "plus")
                             }
                         )
+                        .accessibilityIdentifier("finder.add")
                         .confirmationDialog(
                             selectedItem?.url.lastPathComponent ?? "",
                             isPresented: $isPresentedAddDialog

@@ -9,29 +9,56 @@ import XCTest
 
 @testable import Edhita
 
-class EdhitaTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+final class EdhitaTests: XCTestCase {
+    private var temporaryDirectories: [URL] = []
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        for directory in temporaryDirectories {
+            try? FileManager.default.removeItem(at: directory)
         }
+        temporaryDirectories.removeAll()
     }
 
+    private func makeTemporaryDirectory() throws -> URL {
+        let directory = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        temporaryDirectories.append(directory)
+        return directory
+    }
+
+    func testFinderItemUpdateAndDuplicateCreatesCopies() throws {
+        let directory = try makeTemporaryDirectory()
+        let fileURL = directory.appendingPathComponent("note.md")
+        try "hello".write(to: fileURL, atomically: true, encoding: .utf8)
+
+        let item = FinderItem(url: fileURL)
+        XCTAssertEqual(item.content, "hello")
+
+        item.update(content: "updated")
+        XCTAssertEqual(try String(contentsOf: fileURL), "updated")
+
+        item.duplicate()
+        let firstCopyName = String(format: NSLocalizedString("Copy of %@", comment: ""), "note.md")
+        let firstCopyURL = directory.appendingPathComponent(firstCopyName)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: firstCopyURL.path))
+
+        item.duplicate()
+        let secondCopyURL = directory.appendingPathComponent("\(firstCopyName) 2")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: secondCopyURL.path))
+    }
+
+    func testFinderListAddItemAndRelativePath() throws {
+        let directory = try makeTemporaryDirectory()
+        let list = FinderList(url: directory)
+
+        list.addItem(name: "draft.txt", isDirectory: false)
+
+        let createdFileURL = directory.appendingPathComponent("draft.txt")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: createdFileURL.path))
+        XCTAssertTrue(list.items.contains(where: { $0.filename == "draft.txt" }))
+
+        XCTAssertEqual(FinderList.relativePath(for: FinderList.rootURL), "/")
+        let nested = FinderList.rootURL.appendingPathComponent("folder").appendingPathComponent("sub")
+        XCTAssertEqual(FinderList.relativePath(for: nested), "/folder/sub")
+    }
 }

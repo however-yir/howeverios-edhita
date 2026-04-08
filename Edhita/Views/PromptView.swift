@@ -25,6 +25,7 @@ struct PromptView: View {
                 TextField(NSLocalizedString(textLabel, comment: ""), text: $text)
                     .autocapitalization(.none)
                     .focused($isFocused)
+                    .accessibilityIdentifier("prompt.textfield")
             }
         }
         .navigationTitle(NSLocalizedString(title, comment: ""))
@@ -43,6 +44,7 @@ struct PromptView: View {
                     dismiss()
                 }
                 .disabled(canSave(text))
+                .accessibilityIdentifier("prompt.save")
             }
         }
         .onAppear {
