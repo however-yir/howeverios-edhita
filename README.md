@@ -13,7 +13,11 @@
 >
 > Upstream: `tnantoka/edhita`
 >
+> Attribution: upstream license remains in `LICENSE`; fork boundary and redistribution notes are maintained in `LICENSE.HOWEVER` and `NOTICE.md`.
+>
 > Series: [howeverandroid-architecture-lab](https://github.com/however-yir/howeverandroid-architecture-lab)
+
+![howeverios-edhita showcase cover](docs/showcase/portfolio-cover.svg)
 
 ## 目录
 
@@ -217,3 +221,4 @@ open Edhita.xcodeproj
 
 - 上游代码遵循 MIT。
 - 衍生说明见 `LICENSE.HOWEVER`。
+- 分发边界与 fork 归属说明见 `NOTICE.md`。

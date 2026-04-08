@@ -1,0 +1,35 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" rx="40" fill="#F5F8FF"/>
+  <rect x="48" y="48" width="1504" height="804" rx="32" fill="url(#bg)"/>
+  <rect x="116" y="118" width="510" height="664" rx="44" fill="#0F172A"/>
+  <rect x="142" y="152" width="458" height="596" rx="32" fill="#F8FAFC"/>
+  <rect x="182" y="196" width="378" height="54" rx="18" fill="#DCE7FF"/>
+  <rect x="182" y="282" width="378" height="210" rx="28" fill="#EAF0FF"/>
+  <rect x="204" y="318" width="212" height="18" rx="9" fill="#7C9BFF"/>
+  <rect x="204" y="356" width="324" height="14" rx="7" fill="#A6BDFE"/>
+  <rect x="204" y="386" width="286" height="14" rx="7" fill="#A6BDFE"/>
+  <rect x="204" y="416" width="238" height="14" rx="7" fill="#A6BDFE"/>
+  <rect x="182" y="530" width="178" height="146" rx="24" fill="#FFF7ED"/>
+  <rect x="382" y="530" width="178" height="146" rx="24" fill="#ECFEFF"/>
+  <circle cx="371" cy="722" r="34" fill="#E2E8F0"/>
+  <text x="722" y="224" fill="#EAF1FF" font-family="Helvetica, Arial, sans-serif" font-size="26" letter-spacing="2">SWIFTUI EDITOR SHOWCASE</text>
+  <text x="722" y="328" fill="white" font-family="Helvetica, Arial, sans-serif" font-size="84" font-weight="700">HoweverEdhita</text>
+  <text x="722" y="394" fill="#D7E5FF" font-family="Helvetica, Arial, sans-serif" font-size="34">Lightweight editing, branded fork governance, and iOS portfolio packaging</text>
+  <rect x="722" y="462" width="214" height="58" rx="29" fill="#2563EB"/>
+  <text x="780" y="499" fill="white" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700">SwiftUI</text>
+  <rect x="954" y="462" width="232" height="58" rx="29" fill="#0F766E"/>
+  <text x="1003" y="499" fill="white" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700">File Editing</text>
+  <rect x="1204" y="462" width="278" height="58" rx="29" fill="#7C3AED"/>
+  <text x="1252" y="499" fill="white" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700">Config-Driven Fork</text>
+  <rect x="722" y="580" width="760" height="142" rx="30" fill="rgba(15,23,42,0.22)"/>
+  <text x="764" y="638" fill="#F8FBFF" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700">What this repo proves</text>
+  <text x="764" y="686" fill="#D8E7FF" font-family="Helvetica, Arial, sans-serif" font-size="24">Bundle ID and signing governance, upstream delta documentation, and an editor app packaged for showcase use.</text>
+  <text x="764" y="728" fill="#D8E7FF" font-family="Helvetica, Arial, sans-serif" font-size="24">Next asset target: real simulator captures for file list, editor screen, settings, and share flow.</text>
+  <defs>
+    <linearGradient id="bg" x1="48" y1="48" x2="1552" y2="852" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#19356F"/>
+      <stop offset="0.52" stop-color="#285CA7"/>
+      <stop offset="1" stop-color="#5A8BFF"/>
+    </linearGradient>
+  </defs>
+</svg>
