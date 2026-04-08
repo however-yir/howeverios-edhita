@@ -80,12 +80,12 @@ extension FinderList {
         let items = examples.items
         items.first { $0.filename == "index.md" }?.update(
             content: """
-                # Edhita
+                # HoweverEdhita
 
                 ---
 
                 Fully open source text editor for iOS written in SwiftUI.  
-                https://edhita.bornneet.com/
+                https://github.com/however-yir/howeverios-edhita
 
                 ![](logo.png)
                 """

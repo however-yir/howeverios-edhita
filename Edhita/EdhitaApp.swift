@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct EdhitaApp: App {
+struct HoweverEdhitaApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 

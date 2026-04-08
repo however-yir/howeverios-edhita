@@ -1,0 +1,7 @@
+// Environment sample for howeverios-edhita
+// Copy to Environment.local.xcconfig and include in your target build settings.
+
+API_BASE_URL = https://api.example.com
+LOG_ENDPOINT = https://logs.example.com/ingest
+FEATURE_ENABLE_ANALYTICS = NO
+FEATURE_ENABLE_CLOUD_SYNC = NO
