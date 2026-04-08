@@ -84,6 +84,17 @@
 - 系统分享与辅助视图能力。
 - iPhone/iPad 形态下的基础适配。
 
+### 5.1 展示首屏建议
+
+当前仓库尚未提交真实设备或模拟器截图。为了让首页更像完整作品集，建议优先补齐以下 4 组演示素材：
+
+| 场景 | 推荐展示内容 | 建议文件名 | 用途 |
+|---|---|---|---|
+| 冷启动与文件列表 | App 图标、目录列表、品牌化名称 | `docs/showcase/launch-list.png` | README 首屏静态图 |
+| 编辑主界面 | 打开示例文件并展示编辑区域 | `docs/showcase/editor-main.png` | 功能证明图 |
+| 设置与字体偏好 | 字体大小、主题或偏好项切换 | `docs/showcase/settings.png` | 配置能力展示 |
+| 交互录屏 | 浏览目录、编辑文本、分享文件 | `docs/showcase/editor-flow.mov` | 招聘/作品集演示视频 |
+
 ## 6. 技术栈说明
 
 - Swift
@@ -137,6 +148,25 @@ open Edhita.xcodeproj
 - `DEVELOPMENT_TEAM` 为占位值，需替换为你自己的 Team ID。
 - 广告与外部服务标识建议全部使用占位/环境注入。
 
+### 9.1 Bundle ID 与签名检查表
+
+| 配置项 | 当前默认值 | 使用前动作 | 说明 |
+|---|---|---|---|
+| `PRODUCT_BUNDLE_IDENTIFIER` | `com.howeveryir.howeveriosedhita` | 按团队命名规范替换 | 避免与其他 App 或历史包名冲突 |
+| `DEVELOPMENT_TEAM` | `YOURTEAMID123` | 替换为真实 Team ID | 否则无法正常签名运行 |
+| `App Display Name` | `HoweverEdhita` | 视品牌需要微调 | 保持 README、截图与安装包名称一致 |
+| `Config/Environment.local.xcconfig` | 本地复制生成 | 填入本地调试配置 | 不要提交真实敏感标识 |
+| 广告/外部服务 ID | 占位值 | 仅在发布环境注入 | 避免把真实 ID 留在公开仓库 |
+
+### 9.2 录屏与截图脚本建议
+
+建议在演示素材中稳定覆盖以下顺序：
+
+1. 从文件列表进入一个示例 Markdown 或文本文件。
+2. 展示编辑、滚动与基础设置切换。
+3. 展示分享或文件导出路径。
+4. 结束在设置页或品牌化首页，形成完整的“轻量编辑器产品感”。
+
 ## 10. 测试与质量保障
 
 建议执行：
@@ -163,6 +193,16 @@ open Edhita.xcodeproj
 
 - `docs/HOWEVER_DELTA.md`
 - `docs/DERIVATIVE_50POINT_PLAN.zh-CN.md`
+
+差异摘要可先按下表理解：
+
+| 维度 | Upstream Edhita | howeverios-edhita |
+|---|---|---|
+| 品牌层 | 保持上游命名 | 切换到 `HoweverEdhita` 品牌语义 |
+| 包名与签名 | 上游默认工程配置 | 补齐 Bundle ID 与 Team ID 占位治理 |
+| 配置管理 | 以工程默认值为主 | 新增 `Config/Environment.sample.xcconfig` |
+| 协作治理 | 偏上游项目语境 | 增加 `LICENSE.HOWEVER`、路线图与同步脚本 |
+| 作品集展示 | 以功能可用为主 | 更强调 README、截图位和品牌化演示资产 |
 
 ## 13. 贡献方式
 
