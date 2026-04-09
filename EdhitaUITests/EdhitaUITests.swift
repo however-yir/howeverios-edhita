@@ -8,6 +8,27 @@
 import XCTest
 
 final class EdhitaUITests: XCTestCase {
+    @discardableResult
+    private func tapFirstExisting(_ elements: [XCUIElement], timeout: TimeInterval) -> Bool {
+        for element in elements where element.waitForExistence(timeout: timeout) {
+            element.tap()
+            return true
+        }
+        return false
+    }
+
+    private func closeShareSheetIfPresent(_ app: XCUIApplication) {
+        let dismissed = tapFirstExisting(
+            [
+                app.buttons["Cancel"],
+                app.buttons["Done"],
+                app.buttons["关闭"],
+                app.buttons["完成"],
+            ],
+            timeout: 5
+        )
+        XCTAssertTrue(dismissed, "Expected share sheet dismiss button to appear")
+    }
 
     override func setUpWithError() throws {
         continueAfterFailure = false
@@ -21,14 +42,17 @@ final class EdhitaUITests: XCTestCase {
         XCTAssertTrue(addButton.waitForExistence(timeout: 5))
         addButton.tap()
 
-        let fileAction = app.sheets.buttons.element(boundBy: 0)
-        if fileAction.waitForExistence(timeout: 5) {
-            fileAction.tap()
-        } else {
-            let fallbackFileAction = app.buttons["File"]
-            XCTAssertTrue(fallbackFileAction.waitForExistence(timeout: 5))
-            fallbackFileAction.tap()
-        }
+        let didChooseFileType = tapFirstExisting(
+            [
+                app.sheets.buttons["File"],
+                app.sheets.buttons["文件"],
+                app.sheets.buttons.element(boundBy: 0),
+                app.buttons["File"],
+                app.buttons["文件"],
+            ],
+            timeout: 5
+        )
+        XCTAssertTrue(didChooseFileType, "Expected file creation action to be present")
 
         let fileName = "ui-smoke-\(UUID().uuidString.prefix(8)).txt"
         let promptField = app.textFields["prompt.textfield"]
@@ -54,8 +78,6 @@ final class EdhitaUITests: XCTestCase {
         XCTAssertTrue(shareButton.waitForExistence(timeout: 5))
         shareButton.tap()
 
-        let cancelButton = app.buttons["Cancel"]
-        XCTAssertTrue(cancelButton.waitForExistence(timeout: 5))
-        cancelButton.tap()
+        closeShareSheetIfPresent(app)
     }
 }

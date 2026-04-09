@@ -61,4 +61,28 @@ final class EdhitaTests: XCTestCase {
         let nested = FinderList.rootURL.appendingPathComponent("folder").appendingPathComponent("sub")
         XCTAssertEqual(FinderList.relativePath(for: nested), "/folder/sub")
     }
+
+    func testFinderItemRenameMoveAndDestroyLifecycle() throws {
+        let sourceDirectory = try makeTemporaryDirectory()
+        let destinationDirectory = try makeTemporaryDirectory()
+        let originalURL = sourceDirectory.appendingPathComponent("note.txt")
+        try "content".write(to: originalURL, atomically: true, encoding: .utf8)
+
+        let item = FinderItem(url: originalURL)
+        item.rename(name: "renamed.txt")
+
+        let renamedURL = sourceDirectory.appendingPathComponent("renamed.txt")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: renamedURL.path))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: originalURL.path))
+
+        let renamedItem = FinderItem(url: renamedURL)
+        renamedItem.move(directory: destinationDirectory)
+
+        let movedURL = destinationDirectory.appendingPathComponent("renamed.txt")
+        XCTAssertTrue(FileManager.default.fileExists(atPath: movedURL.path))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: renamedURL.path))
+
+        FinderItem(url: movedURL).destroy()
+        XCTAssertFalse(FileManager.default.fileExists(atPath: movedURL.path))
+    }
 }
