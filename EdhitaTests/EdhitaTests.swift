@@ -85,4 +85,17 @@ final class EdhitaTests: XCTestCase {
         FinderItem(url: movedURL).destroy()
         XCTAssertFalse(FileManager.default.fileExists(atPath: movedURL.path))
     }
+
+    func testLargeDocumentUpdatePerformance() throws {
+        let directory = try makeTemporaryDirectory()
+        let fileURL = directory.appendingPathComponent("large.txt")
+        try "".write(to: fileURL, atomically: true, encoding: .utf8)
+        let item = FinderItem(url: fileURL)
+        let payload = String(repeating: "0123456789abcdef", count: 80_000)
+
+        measure {
+            item.update(content: payload)
+            _ = item.content.count
+        }
+    }
 }

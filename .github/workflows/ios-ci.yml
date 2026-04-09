@@ -19,12 +19,34 @@ env:
   DESTINATION: platform=iOS Simulator,name=iPhone 15
 
 jobs:
+  lint:
+    runs-on: macos-latest
+    continue-on-error: true
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install SwiftLint and SwiftFormat
+        run: |
+          brew install swiftlint swiftformat
+
+      - name: Run SwiftFormat (lint mode)
+        run: swiftformat --lint Edhita EdhitaTests EdhitaUITests
+
+      - name: Run SwiftLint
+        run: swiftlint lint --strict
+
   build:
     runs-on: macos-latest
+    needs: lint
     timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Validate test plan file
+        run: test -f Edhita.xctestplan
 
       - name: Build (no signing)
         run: |
@@ -86,6 +108,12 @@ jobs:
             -only-testing:EdhitaUITests/EdhitaUITests/testLaunchEditAndShareSmoke \
             test
 
+      - name: Capture Simulator Screenshot On Failure
+        if: failure()
+        run: |
+          mkdir -p build
+          xcrun simctl io booted screenshot build/ui-smoke-failure.png || true
+
       - name: Upload UI Smoke Results
         if: always()
         uses: actions/upload-artifact@v4
@@ -93,3 +121,11 @@ jobs:
           name: ui-smoke-tests-xcresult
           path: build/EdhitaUITests.xcresult
           if-no-files-found: warn
+
+      - name: Upload UI Smoke Screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-smoke-failure-screenshot
+          path: build/ui-smoke-failure.png
+          if-no-files-found: ignore

@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "3C8A5C45-7C4D-4E09-8ED2-8F0B86BE3211",
+      "name" : "Default",
+      "options" : {
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Edhita.xcodeproj",
+      "identifier" : "9B376926288D8D46002392EB",
+      "name" : "Edhita"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Edhita.xcodeproj",
+        "identifier" : "9B376936288D8D47002392EB",
+        "name" : "EdhitaTests"
+      }
+    },
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:Edhita.xcodeproj",
+        "identifier" : "9B376940288D8D47002392EB",
+        "name" : "EdhitaUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
