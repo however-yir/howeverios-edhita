@@ -1,4 +1,4 @@
-# howeverios-edhita
+# howeverios-edhita - 轻量 iOS 文本编辑器 | Lightweight iOS Text Editor
 
 [![Build](https://github.com/however-yir/howeverios-edhita/actions/workflows/ios-ci.yml/badge.svg)](https://github.com/however-yir/howeverios-edhita/actions/workflows/ios-ci.yml)
 [![Docs](https://img.shields.io/badge/docs-README-0A7EFA)](https://github.com/however-yir/howeverios-edhita#readme)
