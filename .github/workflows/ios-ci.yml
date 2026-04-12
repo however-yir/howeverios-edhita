@@ -82,7 +82,7 @@ jobs:
 
       - name: Upload Unit Test Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: unit-tests-xcresult
           path: build/EdhitaTests.xcresult
@@ -116,7 +116,7 @@ jobs:
 
       - name: Upload UI Smoke Results
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ui-smoke-tests-xcresult
           path: build/EdhitaUITests.xcresult
@@ -124,7 +124,7 @@ jobs:
 
       - name: Upload UI Smoke Screenshot
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ui-smoke-failure-screenshot
           path: build/ui-smoke-failure.png
