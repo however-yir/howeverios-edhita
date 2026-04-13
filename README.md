@@ -13,6 +13,12 @@
 >
 > Upstream: `tnantoka/edhita`
 >
+> 非官方声明（Non-Affiliation）:
+> 本仓库为社区维护的衍生项目，与上游项目所属组织或其关联公司无隶属、无官方背书关系。
+>
+> 商标声明（Trademark Notice）:
+> 上游项目名称、Logo 与相关商标归其各自权利人所有；本仓库仅用于兼容性与来源说明，不主张其商标权。
+>
 > Attribution: upstream license remains in `LICENSE`; fork boundary and redistribution notes are maintained in `LICENSE.HOWEVER` and `NOTICE.md`.
 >
 > Series: [howeverandroid-architecture-lab](https://github.com/however-yir/howeverandroid-architecture-lab)
