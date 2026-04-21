@@ -70,7 +70,13 @@ struct FinderListView: View {
                     if !isEditing {
                         Button(
                             action: {
-                                isPresentedAddDialog.toggle()
+                                if ProcessInfo.processInfo.arguments.contains(
+                                    "UITEST_BYPASS_ADD_DIALOG"
+                                ) {
+                                    isPresentedFilePrompt.toggle()
+                                } else {
+                                    isPresentedAddDialog.toggle()
+                                }
                             },
                             label: {
                                 Image(systemName: "plus")

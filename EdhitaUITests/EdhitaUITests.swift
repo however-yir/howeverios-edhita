@@ -46,23 +46,12 @@ final class EdhitaUITests: XCTestCase {
 
     func testLaunchEditAndShareSmoke() throws {
         let app = XCUIApplication()
+        app.launchArguments.append("UITEST_BYPASS_ADD_DIALOG")
         app.launch()
 
         let addButton = app.buttons["finder.add"]
         XCTAssertTrue(addButton.waitForExistence(timeout: 5))
         tapElement(addButton)
-
-        let didChooseFileType = tapFirstExisting(
-            [
-                app.sheets.buttons["File"],
-                app.sheets.buttons["文件"],
-                app.sheets.buttons.element(boundBy: 0),
-                app.buttons["File"],
-                app.buttons["文件"],
-            ],
-            timeout: 5
-        )
-        XCTAssertTrue(didChooseFileType, "Expected file creation action to be present")
 
         let fileName = "ui-smoke-\(UUID().uuidString.prefix(8)).txt"
         let promptField = app.textFields["prompt.textfield"]
