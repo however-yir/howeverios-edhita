@@ -22,6 +22,7 @@ struct FinderListView: View {
     @State private var isPresentedMoveList = false
     @State private var isPresentedInfo = false
     @State private var isEditing = false
+    @State private var hasAutoPresentedUITestFilePrompt = false
 
     var body: some View {
         VStack {
@@ -232,6 +233,15 @@ struct FinderListView: View {
         }
         .onAppear {
             list.refresh()
+
+            if ProcessInfo.processInfo.arguments.contains("UITEST_BYPASS_ADD_DIALOG"),
+               !hasAutoPresentedUITestFilePrompt
+            {
+                hasAutoPresentedUITestFilePrompt = true
+                DispatchQueue.main.async {
+                    isPresentedFilePrompt = true
+                }
+            }
         }
         .environment(\.editMode, .constant(isEditing ? .active : .inactive))
     }

@@ -49,12 +49,13 @@ final class EdhitaUITests: XCTestCase {
         app.launchArguments.append("UITEST_BYPASS_ADD_DIALOG")
         app.launch()
 
-        let addButton = app.buttons["finder.add"]
-        XCTAssertTrue(addButton.waitForExistence(timeout: 5))
-        tapElement(addButton)
-
         let fileName = "ui-smoke-\(UUID().uuidString.prefix(8)).txt"
         let promptField = app.textFields["prompt.textfield"]
+        if !promptField.waitForExistence(timeout: 8) {
+            let addButton = app.buttons["finder.add"]
+            XCTAssertTrue(addButton.waitForExistence(timeout: 5))
+            tapElement(addButton)
+        }
         XCTAssertTrue(promptField.waitForExistence(timeout: 5))
         promptField.tap()
         promptField.typeText(fileName)
