@@ -11,10 +11,20 @@ final class EdhitaUITests: XCTestCase {
     @discardableResult
     private func tapFirstExisting(_ elements: [XCUIElement], timeout: TimeInterval) -> Bool {
         for element in elements where element.waitForExistence(timeout: timeout) {
-            element.tap()
+            tapElement(element)
             return true
         }
         return false
+    }
+
+    private func tapElement(_ element: XCUIElement) {
+        if element.isHittable {
+            element.tap()
+            return
+        }
+
+        // Some simulator/device combinations report existence but fail AX scroll-to-visible.
+        element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
     }
 
     private func closeShareSheetIfPresent(_ app: XCUIApplication) {
@@ -40,7 +50,7 @@ final class EdhitaUITests: XCTestCase {
 
         let addButton = app.buttons["finder.add"]
         XCTAssertTrue(addButton.waitForExistence(timeout: 5))
-        addButton.tap()
+        tapElement(addButton)
 
         let didChooseFileType = tapFirstExisting(
             [
@@ -67,16 +77,16 @@ final class EdhitaUITests: XCTestCase {
 
         let createdFile = app.staticTexts[fileName]
         XCTAssertTrue(createdFile.waitForExistence(timeout: 5))
-        createdFile.tap()
+        tapElement(createdFile)
 
         let editor = app.textViews["editor.text"]
         XCTAssertTrue(editor.waitForExistence(timeout: 5))
-        editor.tap()
+        tapElement(editor)
         editor.typeText("Smoke UI content")
 
         let shareButton = app.buttons["editor.share"]
         XCTAssertTrue(shareButton.waitForExistence(timeout: 5))
-        shareButton.tap()
+        tapElement(shareButton)
 
         closeShareSheetIfPresent(app)
     }
