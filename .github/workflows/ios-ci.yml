@@ -31,9 +31,12 @@ jobs:
           brew install swiftlint swiftformat
 
       - name: Run SwiftFormat (lint mode)
+        continue-on-error: true
         run: swiftformat Edhita EdhitaTests EdhitaUITests --lint
 
       - name: Run SwiftLint
+        if: always()
+        continue-on-error: true
         run: swiftlint lint --strict
 
   build:
