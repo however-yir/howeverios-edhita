@@ -16,7 +16,6 @@ permissions:
 env:
   PROJECT_PATH: Edhita.xcodeproj
   SCHEME: Edhita
-  DESTINATION: platform=iOS Simulator,name=iPhone 15
 
 jobs:
   lint:
@@ -32,7 +31,7 @@ jobs:
           brew install swiftlint swiftformat
 
       - name: Run SwiftFormat (lint mode)
-        run: swiftformat --lint Edhita EdhitaTests EdhitaUITests
+        run: swiftformat Edhita EdhitaTests EdhitaUITests --lint
 
       - name: Run SwiftLint
         run: swiftlint lint --strict
@@ -44,6 +43,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve simulator destination
+        run: |
+          SIMULATOR_ID="$(xcrun simctl list devices available \
+            | grep -m1 -E 'iPhone .*\([0-9A-Fa-f-]{36}\)' \
+            | sed -E 's/.*\(([0-9A-Fa-f-]{36})\).*/\1/')"
+          if [ -z "$SIMULATOR_ID" ]; then
+            echo "::error::No available iPhone simulator found on runner."
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "DESTINATION=platform=iOS Simulator,id=$SIMULATOR_ID" >> "$GITHUB_ENV"
+          echo "Using destination: platform=iOS Simulator,id=$SIMULATOR_ID"
 
       - name: Validate test plan file
         run: test -f Edhita.xctestplan
@@ -67,6 +79,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve simulator destination
+        run: |
+          SIMULATOR_ID="$(xcrun simctl list devices available \
+            | grep -m1 -E 'iPhone .*\([0-9A-Fa-f-]{36}\)' \
+            | sed -E 's/.*\(([0-9A-Fa-f-]{36})\).*/\1/')"
+          if [ -z "$SIMULATOR_ID" ]; then
+            echo "::error::No available iPhone simulator found on runner."
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "DESTINATION=platform=iOS Simulator,id=$SIMULATOR_ID" >> "$GITHUB_ENV"
+          echo "Using destination: platform=iOS Simulator,id=$SIMULATOR_ID"
 
       - name: Run EdhitaTests
         run: |
@@ -95,6 +120,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Resolve simulator destination
+        run: |
+          SIMULATOR_ID="$(xcrun simctl list devices available \
+            | grep -m1 -E 'iPhone .*\([0-9A-Fa-f-]{36}\)' \
+            | sed -E 's/.*\(([0-9A-Fa-f-]{36})\).*/\1/')"
+          if [ -z "$SIMULATOR_ID" ]; then
+            echo "::error::No available iPhone simulator found on runner."
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "DESTINATION=platform=iOS Simulator,id=$SIMULATOR_ID" >> "$GITHUB_ENV"
+          echo "Using destination: platform=iOS Simulator,id=$SIMULATOR_ID"
 
       - name: Run EdhitaUITests smoke
         run: |

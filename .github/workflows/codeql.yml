@@ -19,13 +19,24 @@ jobs:
     env:
       PROJECT_PATH: Edhita.xcodeproj
       SCHEME: Edhita
-      DESTINATION: platform=iOS Simulator,name=iPhone 15
     steps:
       - uses: actions/checkout@v4
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v4
         with:
           languages: swift
+      - name: Resolve simulator destination
+        run: |
+          SIMULATOR_ID="$(xcrun simctl list devices available \
+            | grep -m1 -E 'iPhone .*\([0-9A-Fa-f-]{36}\)' \
+            | sed -E 's/.*\(([0-9A-Fa-f-]{36})\).*/\1/')"
+          if [ -z "$SIMULATOR_ID" ]; then
+            echo "::error::No available iPhone simulator found on runner."
+            xcrun simctl list devices available
+            exit 1
+          fi
+          echo "DESTINATION=platform=iOS Simulator,id=$SIMULATOR_ID" >> "$GITHUB_ENV"
+          echo "Using destination: platform=iOS Simulator,id=$SIMULATOR_ID"
       - name: Build for CodeQL
         run: |
           xcodebuild \
